@@ -44,8 +44,8 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                  */
                 'annotations' => [
-                    base_path('app/Http/Controllers'),
                     base_path('app/Swagger'),
+                    base_path('app/Http/Controllers'),
                 ],
             ],
         ],
@@ -170,6 +170,7 @@ return [
          * API security definitions. Will be generated into documentation file.
         */
         'securityDefinitions' => [
+
             'securitySchemes' => [
                 /*
                  * Examples of Security schemes
@@ -221,7 +222,8 @@ return [
                 /*
                  * Examples of Securities
                  */
-                'bearerAuth' => [],
+                'BearerAuth' => [],
+
 
                 
             ],
@@ -311,6 +313,14 @@ return [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://127.0.0.1:8000/api'),
 
 
+        ],
+    ],
+    'securityDefinitions' => [
+        'BearerAuth' => [
+            'type' => 'apiKey',
+            'description' => 'Enter your token in the format: Bearer {token}',
+            'name' => 'Authorization',
+            'in' => 'header',
         ],
     ],
 ];

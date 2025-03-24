@@ -1,25 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
 /**
  * @OA\Info(
- *      version="1.0.0",
- *      title="E-Commerce API",
- *      description="API documentation for the E-Commerce project",
- *      @OA\Contact(
- *          email="support@example.com"
- *      ),
- *      @OA\License(
- *          name="Apache 2.0",
- *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
- *      )
+ *     title="E-Commerce API",
+ *     version="1.0.0",
+ *     description="API documentation for the eCommerce platform"
  * )
+ *
  * @OA\Server(
- *      url="http://127.0.0.1:8000/",
- *      description=""
+ *     url="http://127.0.0.1:8000/",
+ *     description="Local development server"
+ * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="BearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     description="Enter token in format 'Bearer {token}'"
  * )
  */
-abstract class Controller
+class Controller extends BaseController
 {
-    //
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

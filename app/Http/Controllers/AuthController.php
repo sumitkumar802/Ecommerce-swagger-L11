@@ -9,6 +9,8 @@ use OpenApi\Annotations as OA;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
@@ -114,35 +116,43 @@ class AuthController extends Controller
      * @OA\Post(
      *     path="/api/logout",
      *     summary="Logout a user",
-     *     @OA\Response(response="200", description="User  logged out successfully"),
-     *     @OA\Response(response="401", description="Unauthorized")
+     *     tags={"Authentication"},
+     *     security={{"BearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="User logged out successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Successfully logged out")
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Unauthorized")
      * )
      */
     public function logout(Request $request){
-        // JWTAuth::invalidate(JWTAuth::getToken());
         Auth::guard('api')->logout();
-
         return response()->json(['mesage'=>'Logged Out Successfuly']);
+
     }
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *     path="/api/me",
      *     summary="Get authenticated user details",
      *     tags={"Authentication"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="User details",
      *         @OA\JsonContent(
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="name", type="string", example="John Doe"),
-     *             @OA\Property(property="email", type="string", example="johndoe@example.com"),
+     *             @OA\Property(property="email", type="string", example="johndoe@example.com")
      *         )
      *     ),
      *     @OA\Response(response=401, description="Unauthorized")
      * )
      */
+
     public function me()
     {
         return response()->json(auth()->user());
@@ -153,7 +163,7 @@ class AuthController extends Controller
      *     path="/api/refresh",
      *     summary="Refresh JWT token",
      *     tags={"Authentication"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="New token",

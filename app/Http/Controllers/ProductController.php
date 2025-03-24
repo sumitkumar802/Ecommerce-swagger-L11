@@ -8,23 +8,29 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use OpenApi\Annotations as OA;
+use Illuminate\Support\Facades\Cache;
 
-/**
- * @OA\Tag(name="Products", description="Product management")
- */
+
 class ProductController extends Controller
 {
-    /**
-     * @OA\Get(
-     *     path="/api/products",
-     *     tags={"Products"},
-     *     security={{"apiAuth": {}}},
-     *     summary="Get list of products",
-     *     @OA\Response(response="200", description="A list of products")
-     * )
-     */
+/**
+ * @OA\Get(
+ *     path="/api/products",
+ *     tags={"Products"},
+ *     summary="Get list of products",
+ *     security={{"BearerAuth": {}}}, 
+ *     @OA\Response(
+ *         response=200,
+ *         description="A list of products",
+ *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Product"))
+ *     ),
+ *     @OA\Response(response=401, description="Unauthorized"),
+ *     @OA\Response(response=500, description="Internal Server Error")
+ * )
+ */
     public function index()
     {
+        // exit("pop2");
         return ProductResource::collection(Product::paginate(10));
     }
 
@@ -32,7 +38,7 @@ class ProductController extends Controller
      * @OA\Post(
      *     path="/api/products",
      *     tags={"Products"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     summary="Create a new product",
      *     @OA\RequestBody(
      *         required=true,
@@ -54,7 +60,7 @@ class ProductController extends Controller
      *     path="/api/products/{id}",
      *     summary="Get a single product",
      *     tags={"Products"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -80,7 +86,7 @@ class ProductController extends Controller
      *     path="/api/products/{id}",
      *     summary="Update a product",
      *     tags={"Products"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -112,7 +118,7 @@ class ProductController extends Controller
      *     path="/api/products/{id}",
      *     summary="Delete a product",
      *     tags={"Products"},
-     *     security={{"apiAuth": {}}},
+     *     security={{"BearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
