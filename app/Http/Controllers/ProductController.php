@@ -30,8 +30,13 @@ class ProductController extends Controller
  */
     public function index()
     {
-        // exit("pop2");
-        return ProductResource::collection(Product::paginate(10));
+        // exit("pop2"); 10 minutes expire
+        $products = Cache::remember('products', 600, function () {
+            return ProductResource::collection(Product::paginate(10));
+        });
+        return $products;
+
+
     }
 
     /**
@@ -52,7 +57,7 @@ class ProductController extends Controller
     {
    
         $product = Product::create($request->validated());
-        
+        Cache::forget('products');
         return new ProductResource($product);
     }
     /**
@@ -110,6 +115,8 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->validated());
+        Cache::forget("product_{$id}");
+        Cache::forget('products');
         return new ProductResource($product);
     }
 
@@ -136,6 +143,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        Cache::forget("product_{$id}");
+        Cache::forget('products');
         return response()->json(['message'=>'Product deleted Successfully'], 200);
     }
 }
