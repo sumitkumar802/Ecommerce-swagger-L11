@@ -115,7 +115,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->validated());
-        Cache::forget("product_{$id}");
+        Cache::forget("product_{$product->id}");
         Cache::forget('products');
         return new ProductResource($product);
     }
@@ -143,7 +143,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        Cache::forget("product_{$id}");
+        Cache::forget("product_{$product->id}");
         Cache::forget('products');
         return response()->json(['message'=>'Product deleted Successfully'], 200);
     }
