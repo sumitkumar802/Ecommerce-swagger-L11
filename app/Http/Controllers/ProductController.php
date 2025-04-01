@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
 /**
  * @OA\Get(
- *     path="/api/products",
+ *     path="/api/v1/products",
  *     tags={"Products"},
  *     summary="Get list of products",
  *     security={{"BearerAuth": {}}}, 
@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/products",
+     *     path="/api/v1/products",
      *     tags={"Products"},
      *     security={{"BearerAuth": {}}},
      *     summary="Create a new product",
@@ -62,7 +62,7 @@ class ProductController extends Controller
     }
     /**
      * @OA\Get(
-     *     path="/api/products/{id}",
+     *     path="/api/v1/products/{id}",
      *     summary="Get a single product",
      *     tags={"Products"},
      *     security={{"BearerAuth": {}}},
@@ -88,7 +88,7 @@ class ProductController extends Controller
     }
     /**
      * @OA\Put(
-     *     path="/api/products/{id}",
+     *     path="/api/v1/products/{id}",
      *     summary="Update a product",
      *     tags={"Products"},
      *     security={{"BearerAuth": {}}},
@@ -122,7 +122,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/products/{id}",
+     *     path="/api/v1/products/{id}",
      *     summary="Delete a product",
      *     tags={"Products"},
      *     security={{"BearerAuth": {}}},

@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/register",
+     *     path="/api/v1/register",
      *     summary="Register a new user",
      *     tags={"Auth"},
      *     @OA\RequestBody(
@@ -58,7 +58,7 @@ class AuthController extends Controller
     }
     /**
      * @OA\Post(
-     *     path="/api/login",
+     *     path="/api/v1/login",
      *     summary="User login",
      *     description="Logs in a user and returns a token",
      *     operationId="login",
@@ -114,7 +114,7 @@ class AuthController extends Controller
     }
     /**
      * @OA\Post(
-     *     path="/api/logout",
+     *     path="/api/v1/logout",
      *     summary="Logout a user",
      *     tags={"Authentication"},
      *     security={{"BearerAuth": {}}},
@@ -136,7 +136,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/me",
+     *     path="/api/v1/me",
      *     summary="Get authenticated user details",
      *     tags={"Authentication"},
      *     security={{"BearerAuth": {}}},
@@ -160,7 +160,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/refresh",
+     *     path="/api/v1/refresh",
      *     summary="Refresh JWT token",
      *     tags={"Authentication"},
      *     security={{"BearerAuth": {}}},

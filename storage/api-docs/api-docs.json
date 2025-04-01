@@ -12,13 +12,13 @@
         }
     ],
     "paths": {
-        "/api/register": {
+        "/api/v1/register": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Register a new user",
-                "operationId": "8a56853624e025573120a09a4c75d468",
+                "operationId": "6796c44e1f6079c411abbfed066c5907",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -46,7 +46,7 @@
                 }
             }
         },
-        "/api/login": {
+        "/api/v1/login": {
             "post": {
                 "tags": [
                     "Auth"
@@ -108,13 +108,13 @@
                 }
             }
         },
-        "/api/logout": {
+        "/api/v1/logout": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Logout a user",
-                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "operationId": "c4eddaf1a2e990cc90e4326c0d731d41",
                 "responses": {
                     "200": {
                         "description": "User logged out successfully",
@@ -143,13 +143,13 @@
                 ]
             }
         },
-        "/api/me": {
+        "/api/v1/me": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Get authenticated user details",
-                "operationId": "3fc3f2f762fb3c5ecf211fcb0d4f81ff",
+                "operationId": "c00eae42a17ad023b41887f78512fb32",
                 "responses": {
                     "200": {
                         "description": "User details",
@@ -186,13 +186,13 @@
                 ]
             }
         },
-        "/api/refresh": {
+        "/api/v1/refresh": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Refresh JWT token",
-                "operationId": "2c27d311a2876560fcb5a754b556cdc5",
+                "operationId": "48bc0aaee4ed3ed89ef12f9065e2df85",
                 "responses": {
                     "200": {
                         "description": "New token",
@@ -229,13 +229,13 @@
                 ]
             }
         },
-        "/api/products": {
+        "/api/v1/products": {
             "get": {
                 "tags": [
                     "Products"
                 ],
                 "summary": "Get list of products",
-                "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
+                "operationId": "7ca3593d05653d957ae7be1ac648ca44",
                 "responses": {
                     "200": {
                         "description": "A list of products",
@@ -268,7 +268,7 @@
                     "Products"
                 ],
                 "summary": "Create a new product",
-                "operationId": "e8185e307706e2cd84bbcf5171e2f09d",
+                "operationId": "cfdb2a3921bee30f9cad135e1c5f1452",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -294,13 +294,13 @@
                 ]
             }
         },
-        "/api/products/{id}": {
+        "/api/v1/products/{id}": {
             "get": {
                 "tags": [
                     "Products"
                 ],
                 "summary": "Get a single product",
-                "operationId": "7ab21ddb713501f3d4c2914892c02a21",
+                "operationId": "1948ab0c6b14a722ad6d1665cd38e1f1",
                 "parameters": [
                     {
                         "name": "id",
@@ -338,7 +338,7 @@
                     "Products"
                 ],
                 "summary": "Update a product",
-                "operationId": "6a7e11900844cd85cff66e662b82bd4c",
+                "operationId": "b9e4a8996649edabc6570985e351fa6b",
                 "parameters": [
                     {
                         "name": "id",
@@ -386,7 +386,7 @@
                     "Products"
                 ],
                 "summary": "Delete a product",
-                "operationId": "e80a6ca46716acee6b47ea1ac91663c0",
+                "operationId": "c935132359292f5732d896b035f3f322",
                 "parameters": [
                     {
                         "name": "id",
@@ -425,7 +425,7 @@
                     "email": {
                         "type": "string",
                         "format": "email",
-                        "example": "user@example.com"
+                        "example": "john@example.com"
                     },
                     "password": {
                         "type": "string",
