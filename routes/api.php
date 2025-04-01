@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 
 
@@ -15,6 +16,9 @@ Route::prefix('v1')->middleware('auth:api')->group(function(){
     Route::post('me', [AuthController::class, 'me']);
     Route::post('refresh', [AuthController::class, 'refresh']);
 
+});
+Route::prefix('v2')->middleware('auth:api')->group(function(){
+    Route::apiResource('orders', OrderController::class);
 });
 Route::prefix('v1')->group(function(){
     Route::post('register', [AuthController::class, 'register']);

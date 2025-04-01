@@ -9,6 +9,10 @@
         {
             "url": "http://127.0.0.1:8000/",
             "description": "Local development server"
+        },
+        {
+            "url": "http://127.0.0.1:8000/api/v2",
+            "description": "Local development server"
         }
     ],
     "paths": {
@@ -229,6 +233,190 @@
                 ]
             }
         },
+        "/api/v2/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get list of orders",
+                "operationId": "fae66e485593594ec5342164037ddd6a",
+                "responses": {
+                    "200": {
+                        "description": "A list of orders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Order"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create a new Order",
+                "operationId": "f45b6dc90fdab17ee6dbbd1bcfcfa816",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v2/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get a single Order",
+                "operationId": "6611436ec0744bddc964e8b5455892df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the Order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update a Order",
+                "operationId": "fe6ab8a7fd5e4f7bd75587a05b550ad3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete a Order",
+                "operationId": "bc5c8f006460e734f6eba9946544332b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order deleted successfully"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/products": {
             "get": {
                 "tags": [
@@ -435,6 +623,41 @@
                 },
                 "type": "object"
             },
+            "Order": {
+                "title": "Order Model",
+                "description": "Order details",
+                "required": [
+                    "name",
+                    "price",
+                    "stock"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Smartphone"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "A great smartphone",
+                        "nullable": true
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 199.99
+                    },
+                    "stock": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "https://example.com/image.jpg",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "Product": {
                 "title": "Product Model",
                 "description": "Product details",
@@ -518,6 +741,10 @@
         {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Orders",
+            "description": "Orders"
         },
         {
             "name": "Products",
